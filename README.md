@@ -69,6 +69,38 @@ class _EmojiHomeState extends State<EmojiHome> {
 }
 
 ```
+1.1 **Widget.test**
+```
+   import 'package:flutter_test/flutter_test.dart';
+
+
+
+import 'package:emoji_app/main.dart';
+
+
+
+void main() {
+
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+
+    // Build our app and trigger a frame.
+
+    await tester.pumpWidget(const EmojiApp());
+
+
+
+    // Verify that the initial emoji and button are present.
+
+    expect(find.text('😀'), findsOneWidget);
+
+    expect(find.text('Tap Me'), findsOneWidget);
+
+  });
+
+}
+
+```
+
 
 2. ***Login_app***
 ```
@@ -171,6 +203,33 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+```
+2.1 **Widget.test**
+```
+   import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:login_app/main.dart';
+
+void main() {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const MyApp());
+
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+  });
 }
 
 ```
@@ -280,6 +339,69 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 ```
+3.1 **Widget.test**
+```
+   import 'package:flutter/material.dart';
+
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:emailvalidation_app/main.dart';
+
+void main() {
+  testWidgets('Login button enables only with valid email and password', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+
+    final emailField = find.byKey(const Key('emailField'));
+
+    final passwordField = find.byKey(const Key('passwordField'));
+
+    final loginButton = find.byKey(const Key('loginButton'));
+
+    // Initially button should be disabled
+
+    ElevatedButton button = tester.widget<ElevatedButton>(loginButton);
+
+    expect(button.onPressed, isNull);
+
+    // Enter invalid email and short password
+
+    await tester.enterText(emailField, 'abc');
+
+    await tester.enterText(passwordField, '123');
+
+    await tester.pump();
+
+    button = tester.widget<ElevatedButton>(loginButton);
+
+    expect(button.onPressed, isNull);
+
+    // Enter valid email and password
+
+    await tester.enterText(emailField, 'test@gmail.com');
+
+    await tester.enterText(passwordField, '123456');
+
+    await tester.pump();
+
+    button = tester.widget<ElevatedButton>(loginButton);
+
+    expect(button.onPressed, isNotNull);
+
+    // Tap login button
+
+    await tester.tap(loginButton);
+
+    await tester.pump();
+
+    // Verify SnackBar text
+
+    expect(find.text('Great! You typed a real email! 😎'), findsOneWidget);
+  });
+}
+
+```
 4. ***Theme Color Change***
 ```
    import 'package:flutter/material.dart';
@@ -347,6 +469,27 @@ class _ThemeChangerScreenState extends State<ThemeChangerScreen> {
   }
 }
 
+```
+4.1 **Widget.test**
+```
+   import 'package:flutter_test/flutter_test.dart';
+
+import 'package:color_change/main.dart';
+
+void main() {
+  testWidgets('Theme color changer smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const ThemeChangerApp());
+
+    // Verify that the title is displayed.
+    expect(find.text('Theme Color Changer'), findsOneWidget);
+
+    // Verify that color change buttons are present.
+    expect(find.text('Blue'), findsOneWidget);
+    expect(find.text('Orange'), findsOneWidget);
+  });
+}
+   
 ```
 5. ***Counter Auto***
 ```
@@ -442,6 +585,32 @@ class _CounterScreenState extends State<CounterScreen> {
 }
 
 ```
+5.1 **widget.test**
+```
+   import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:counterauto_app/main.dart';
+
+void main() {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const CounterApp());
+
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    // Tap the start button and trigger a frame.
+    await tester.tap(find.byIcon(Icons.play_arrow));
+    await tester.pump(const Duration(seconds: 2));
+
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+  });
+}
+   
+```
 6. ***Loading Screen(Progress Bar)***
 ```
    import 'dart:async';
@@ -525,6 +694,33 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 }
 
+```
+6.1 **widget.test**
+```
+   import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:loading_screen/main.dart';
+
+void main() {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const LoadingApp());
+
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+  });
+}
+   
 ```
 7. ***Reminder App***
 ```
@@ -628,6 +824,33 @@ class _ReminderScreenState extends State<ReminderScreen> {
   }
 }
 
+```
+7.1 **Widget.test**
+```
+   import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:reminder_app/main.dart';
+
+void main() {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const ReminderApp());
+
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+  });
+}
+   
 ```
 8.***Prime Number Finder***
 ```
@@ -781,4 +1004,31 @@ class _PrimeScreenState extends State<PrimeScreen> {
   }
 }
 
+```
+8.1 **Widget.test**
+```
+   import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:prime_number_finder/main.dart';
+
+void main() {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const PrimeApp());
+
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+  });
+}
+   
 ```
