@@ -1,3 +1,42 @@
+# Flutter Installations Steps
+```
+🔹 Step:- 1
+            Windows / macOS / Linux (same idea)
+             Go to flutter.dev → Get Started
+             Download the Flutter SDK for your OS
+             Extract it somewhere safe, for example:
+             Windows: C:\flutter
+
+🔹 Step:-2
+           Add Flutter to PATH
+            Windows
+            Search Environment Variables
+            Edit Path
+            Add:- C:\flutter\bin
+
+🔹 Step:-3
+           Verify Flutter Installation
+            Run:- flutter doctor
+            This checks:
+            Flutter SDK
+            VS Code setup
+
+🔹 Step:-4
+           Install VS Code + Extensions
+             Download VS Code
+             Open VS Code → Extensions
+           Install:-
+                    Flutter
+                    Dart
+
+🔹 Step:-5
+           open Terminal :- flutter create Folder_Name
+
+🔹 Step:-6
+           Run Your Flutter App
+             open terminal:- flutter run
+
+```
 # Flutter Codes
 
 1. ***Emoji_app***
