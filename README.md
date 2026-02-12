@@ -1,6 +1,4 @@
-soft computing 
-
-(practical - 1)Implementation of Fuzzy Logic Operations
+practical - 1)Implementation of Fuzzy Logic Operations
 
 import numpy as np
 
@@ -543,7 +541,6 @@ def mcp_activation(net_input, threshold):
     return 1 if net_input >= threshold else 0
 
 # --- 2. The MCP Neuron Function ---
-
 def mcp_neuron(inputs, weights, threshold):
     """
     Simulates the McCulloch-Pitts neuron calculation.
@@ -589,8 +586,6 @@ def implement_or_gate():
     for inputs, expected in test_cases:
         net_input, output = mcp_neuron(inputs, weights, threshold)
         print(f"  {inputs[0]}, {inputs[1]}    |   {net_input}      |    {output}   |   {expected}")
-
-
 def implement_not_gate():
     """Simulates the Logical NOT gate (Output is the inverse of the input)."""
     
@@ -618,31 +613,3 @@ def implement_not_gate():
 
 implement_or_gate()
 implement_not_gate()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
