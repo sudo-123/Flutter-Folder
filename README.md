@@ -1,3 +1,5 @@
+soft computing 
+
 (practical - 1)Implementation of Fuzzy Logic Operations
 
 import numpy as np
